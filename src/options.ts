@@ -1,5 +1,5 @@
 class Options {
-    useSkills: boolean = true;
+    useSkills: boolean = false;
     winningRank: number = 0;
 }
 
