@@ -39,6 +39,7 @@ export class Roulette extends EventTarget {
     private _effects: GameObject[] = [];
 
     private _winnerRank = 0;
+    private _mapId = 0;
     private _totalMarbleCount = 0;
     private _goalDist: number = Infinity;
     private _isRunning: boolean = false;
@@ -220,7 +221,11 @@ export class Roulette extends EventTarget {
     }
 
     private _loadMap() {
-        this._stage = stages[Math.floor(Math.random() * stages.length)];
+        if (this._mapId < stages.length) {
+            this._stage = stages[this._mapId]; 
+        } else {
+            this._stage = stages[Math.floor(Math.random() * stages.length)];
+        }
         this._stageObjects = [];
         const {walls, boxes, wheels, jumpers} = this._stage;
         walls.forEach((wallDef) => {
@@ -284,6 +289,10 @@ export class Roulette extends EventTarget {
 
     public setWinningRank(rank: number) {
         this._winnerRank = rank;
+    }
+
+    public setMap(mapId: number) {
+        this._mapId = mapId;
     }
 
     public setMarbles(names: string[]) {
